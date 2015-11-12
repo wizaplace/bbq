@@ -17,9 +17,13 @@ class SqsQueue extends \Eventio\BBQ\Queue\tests\units\AbstractQueue
     {
         $config = include(TESTS_ROOT.'/config.php');
         $sqsClient = SqsClient::factory([
+            'version' => 'latest',
             'region' => $config['region'],
-            'key' => $config['key'],
-            'secret' => $config['secret'],
+            'credentials' => [
+                'key' => $config['key'],
+                'secret' => $config['secret'],
+            ],
+
         ]);
         parent::beforeTestMethod($method.'toto');
 

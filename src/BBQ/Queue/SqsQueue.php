@@ -52,8 +52,8 @@ class SqsQueue extends AbstractQueue {
         if (!$result->hasKey('Messages')) {
             return null;
         }
-
-        $job = new SqsJob(unserialize($result->getPath('Messages/*/Body')[0]), $result);
+        $message = reset($result->get('Messages'));
+        $job = new SqsJob(unserialize($message['Body']), $message);
         $job->setQueue($this);
 
         $this->lockJob($job);
@@ -71,10 +71,10 @@ class SqsQueue extends AbstractQueue {
     {
         $result = $this->_client->deleteMessage([
             'QueueUrl' => $this->_queueUrl,
-            'ReceiptHandle' => $job->getSqsResource()->getPath('Messages/*/ReceiptHandle')[0],
+            'ReceiptHandle' => $job->getSqsResource()['ReceiptHandle'],
         ]);
 
-        if($result->count() == 0)
+        if(!$result->hasKey('Messages'))
         {
             $this->deleteLockedJob($job);
             return true;
@@ -109,11 +109,11 @@ class SqsQueue extends AbstractQueue {
     {
         $result = $this->_client->changeMessageVisibility([
             'QueueUrl' => $this->_queueUrl,
-            'ReceiptHandle' => $job->getSqsResource()->getPath('Messages/*/ReceiptHandle')[0],
+            'ReceiptHandle' => $job->getSqsResource()['ReceiptHandle'],
             'VisibilityTimeout' => 0,
         ]);
 
-        if($result->count() == 0)
+        if(!$result->hasKey('Messages'))
         {
             $this->deleteLockedJob($job);
             return true;

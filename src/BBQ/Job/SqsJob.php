@@ -14,7 +14,7 @@ class SqsJob extends Job {
 
     public function __construct(
         $payload,
-        \Guzzle\Service\Resource\Model $sqsResource
+        $sqsResource
     )
     {
         parent::__construct($payload);
