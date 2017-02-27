@@ -6,7 +6,7 @@
  */
 
 
-namespace wizacha\BBQ\Job;
+namespace Wizacha\BBQ\Job;
 use \Eventio\BBQ\Job\Job;
 
 
@@ -27,4 +27,4 @@ class SqsJob extends Job {
     {
         return $this->_sqsResource;
     }
-} 
+}
