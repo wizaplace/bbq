@@ -52,7 +52,9 @@ class SqsQueue extends AbstractQueue {
         if (!$result->hasKey('Messages')) {
             return null;
         }
-        $message = reset($result->get('Messages'));
+        
+        $messages = $result->get('Messages');
+        $message = reset($messages);
         $job = new SqsJob(unserialize($message['Body']), $message);
         $job->setQueue($this);
 
