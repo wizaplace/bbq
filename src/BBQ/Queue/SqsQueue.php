@@ -123,4 +123,4 @@ class SqsQueue extends AbstractQueue {
 
         return false;
     }
-} 
+}

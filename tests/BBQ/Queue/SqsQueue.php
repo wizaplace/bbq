@@ -15,6 +15,8 @@ class SqsQueue extends \Eventio\BBQ\Queue\tests\units\AbstractQueue
 
     public function beforeTestMethod($method)
     {
+        parent::beforeTestMethod($method);
+
         $config = include(TESTS_ROOT.'/config.php');
         $sqsClient = SqsClient::factory([
             'version' => 'latest',
@@ -25,7 +27,6 @@ class SqsQueue extends \Eventio\BBQ\Queue\tests\units\AbstractQueue
             ],
 
         ]);
-        parent::beforeTestMethod($method.'toto');
 
         $sqsQueue = new \Wizacha\BBQ\Queue\SqsQueue(
             parent::QUEUE_NAME,

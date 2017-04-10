@@ -128,4 +128,4 @@ abstract class AbstractQueue extends atoum
         $queue->finalizeJob($job);
         $this->boolean($queue->hasLockedJobs())->isFalse();
     }
-} 
+}
