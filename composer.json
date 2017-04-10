@@ -16,7 +16,8 @@
     },
     "require": {
         "eventio/bbq": "~1.0",
-        "aws/aws-sdk-php": "3.*"
+        "aws/aws-sdk-php": "3.*",
+        "php-amqplib/php-amqplib": "^2.6"
     },
     "repositories": [
         {
