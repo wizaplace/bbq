@@ -88,7 +88,8 @@ class AmqpQueue extends AbstractQueue
      */
     public function releaseJob(JobInterface $job)
     {
-        $this->channel->basic_nack($job->getAmqpResource()->delivery_info['delivery_tag'], false, true);
+        // Requeue false to allow dead letter queue
+        $this->channel->basic_nack($job->getAmqpResource()->delivery_info['delivery_tag'], false, false);
         $this->deleteLockedJob($job);
 
         return true;
