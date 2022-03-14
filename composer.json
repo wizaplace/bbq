@@ -15,7 +15,7 @@
         "source": "https://bitbucket.org/wizacha/bbq/src"
     },
     "require": {
-        "eventio/bbq": "~1.0",
+        "eventio/bbq": "dev-master",
         "aws/aws-sdk-php": "3.*",
         "php-amqplib/php-amqplib": "^2.6"
     },
